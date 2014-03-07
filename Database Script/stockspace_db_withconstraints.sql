@@ -4,21 +4,21 @@ use stockspace;
 
 DROP TABLE IF EXISTS employer;
 create table employer(
-employerid int(50) NOT NULL AUTO_INCREMENT,
+employerId int(50) NOT NULL AUTO_INCREMENT,
 username varchar(100) NOT NULL,
 pasword varchar(100) NOT NULL,
 fullname varchar(100) NOT NULL,
 address varchar(100) NOT NULL,
 email varchar(100) NOT NULL,
 phone varchar(15) NOT NULL,
-gcmMessageId varchar(100) DEFAULT NULL,
+gcmMessageId varchar(250) DEFAULT NULL,
 datecreated datetime not null,
-PRIMARY KEY(employerid),
+PRIMARY KEY(employerId),
 UNIQUE KEY (gcmMessageId));
 
 DROP TABLE IF EXISTS employee;
 create table employee(
-employeeid int(50) NOT NULL AUTO_INCREMENT,
+employeeId int(50) NOT NULL AUTO_INCREMENT,
 username varchar(100) NOT NULL,
 pasword varchar(100) NOT NULL,
 fullname varchar(100) NOT NULL,
@@ -26,130 +26,133 @@ address varchar(100) NOT NULL,
 email varchar(100) NOT NULL,
 phone varchar(15) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(employeeid));
+PRIMARY KEY(employeeId));
 
 DROP TABLE IF EXISTS company;
 create table company(
-companyid int(50) NOT NULL AUTO_INCREMENT,
+companyId int(50) NOT NULL AUTO_INCREMENT,
 companyname varchar(100) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(companyid));
+PRIMARY KEY(companyId));
 
 DROP TABLE IF exists attendence;
 create table attendence(
-attendenceid int(50) NOT NULL AUTO_INCREMENT,
-employeeid int(50) NOT NULL,
-intime time DEFAULT NULL,
-outtime time DEFAULT NULL,
-paidstatus varchar(1) DEFAULT NULL,
-paydate datetime NOT NULL,
+attendenceId int(50) NOT NULL AUTO_INCREMENT,
+employeeId int(50) NOT NULL,
+inTime time DEFAULT NULL,
+outTime time DEFAULT NULL,
+payDate datetime NULL,
 datecreated datetime not null,
-PRIMARY KEY(attendenceid),
-FOREIGN KEY(employeeid) references employee(employeeid));
+PRIMARY KEY(attendenceId),
+FOREIGN KEY(employeeId) references employee(employeeId));
 
 DROP TABLE IF EXISTS customer;
 create table customer(
-customerid int(50) NOT NULL AUTO_INCREMENT,
+customerId int(50) NOT NULL AUTO_INCREMENT,
 fullname varchar(100) NOT NULL,
 address varchar(100) NOT NULL,
 email varchar(100) NOT NULL,
 phone varchar(15) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(customerid));
+PRIMARY KEY(customerId));
 
 DROP TABLE IF EXISTS category;
 create table category(
-categoryid int(50) NOT NULL AUTO_INCREMENT,
-catname varchar(100) NOT NULL,
-companyid int(50) NOT NULL,
+categoryId int(50) NOT NULL AUTO_INCREMENT,
+catName varchar(100) NOT NULL,
+companyId int(50) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(categoryid),
-FOREIGN KEY(companyid) references company(companyid));
+PRIMARY KEY(categoryId),
+FOREIGN KEY(companyId) references company(companyId));
 
 DROP TABLE IF EXISTS subcategory;
 create table subcategory(
-subcategoryid int(50) NOT NULL AUTO_INCREMENT,
-subcatname varchar(100) NOT NULL,
-categoryid int(50) NOT NULL,
+subcategoryId int(50) NOT NULL AUTO_INCREMENT,
+subCatName varchar(100) NOT NULL,
+categoryId int(50) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(subcategoryid),
-FOREIGN KEY(categoryid) references category(categoryid));
+PRIMARY KEY(subcategoryId),
+FOREIGN KEY(categoryId) references category(categoryId));
 
 DROP TABLE IF EXISTS product;
 create table product(
-productid int(50) NOT NULL AUTO_INCREMENT,
+productId int(50) NOT NULL AUTO_INCREMENT,
 pname varchar(100) NOT NULL,
-subcategoryid int(50) NOT NULL,
+subcategoryId int(50) NOT NULL,
 desription varchar(100) NOT NULL,
-pstatus varchar(1) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(productid),
-FOREIGN KEY(subcategoryid) references subcategory(subcategoryid));
+PRIMARY KEY(productId),
+FOREIGN KEY(subcategoryId) references subcategory(subcategoryId));
 
 
 DROP TABLE IF EXISTS stock;
 create table stock(
-stockid int(50) NOT NULL AUTO_INCREMENT,
-productid int(50) NOT NULL,
-quantity varchar(100) NOT NULL,
-minstockqty int(15) NOT NULL,
+stockId int(50) NOT NULL AUTO_INCREMENT,
+productId int(50) NOT NULL,
+quantity INT(15) NOT NULL,
+minStockQTY int(15) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(stockid),
-FOREIGN KEY(productid) references product(productid));
+PRIMARY KEY(stockId),
+FOREIGN KEY(productId) references product(productId));
 
 DROP TABLE IF EXISTS sales;
 create table sales(
-salesid int(50) NOT NULL AUTO_INCREMENT,
-dtime DATETIME DEFAULT NULL,
-customerid int(50) NOT NULL,
-paymentmode varchar(15) NOT NULL,
-amount int(50) NOT NULL,
+salesId int(50) NOT NULL AUTO_INCREMENT,
+salesDate DATETIME DEFAULT NULL,
+customerId int(50) NOT NULL,
+paymentMode varchar(15) NOT NULL,
+totalAmount int(50) NOT NULL,
+creditAmount int(50) NOT NULL,
+debitAmount int(50) NOT NULL,
+cashAmount int(50) NOT NULL,
+pendingAmount int(15) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(salesid),
-FOREIGN KEY(customerid) references customer(customerid));
+PRIMARY KEY(salesId),
+FOREIGN KEY(customerId) references customer(customerId));
 
 DROP TABLE IF EXISTS salestransaction;
 create table salestransaction(
-salestransactionid int(50) NOT NULL AUTO_INCREMENT,
-productid int(50) NOT NULL,
-salesid int(50) NOT NULL,
-quantity varchar(100) NOT NULL,
-desription varchar(100) NOT NULL,
+salestransactionId int(50) NOT NULL AUTO_INCREMENT,
+productId int(50) NULL,
+salesId int(50) NOT NULL,
+quantity INT(15) NULL,
+description varchar(100) NULL,
+salesType varchar(1) NOT NULL,
+saleTransactionAmount int(15) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(salestransactionid),
-FOREIGN KEY(productid) references product(productid),
-FOREIGN KEY(salesid) references sales(salesid));
+PRIMARY KEY(salestransactionId),
+FOREIGN KEY(productId) references product(productId),
+FOREIGN KEY(salesId) references sales(salesId));
 
 DROP TABLE IF EXISTS repairproduct;
 create table repairproduct(
-repairproductid int(50) NOT NULL AUTO_INCREMENT,
-categoryid int(50) NOT NULL,
-customerid int(50) NOT NULL,
-employeeid int(50) NOT NULL,
-rname varchar(100) NOT NULL,
+repairproductId int(50) NOT NULL AUTO_INCREMENT,
+customerId int(50) NOT NULL,
+employeeId int(50) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(repairproductid),
-FOREIGN KEY(categoryid) references category(categoryid),
-FOREIGN KEY(customerid) references customer(customerid),
-FOREIGN KEY(employeeid) references employee(employeeid));
+PRIMARY KEY(repairproductId),
+FOREIGN KEY(customerId) references customer(customerId),
+FOREIGN KEY(employeeId) references employee(employeeId));
 
-DROP TABLE IF EXISTS repairr;
-create table repairr(
-repairid int(50) NOT NULL AUTO_INCREMENT,
-repairproductid int(50) NOT NULL,
-desription varchar(100) NOT NULL,
-rstatus varchar(1) NOT NULL,
+DROP TABLE IF EXISTS repairs;
+create table repairs(
+repairId int(50) NOT NULL AUTO_INCREMENT,
+repairproductId int(50) NOT NULL,
+subcategoryId int(50) NOT NULL,
+description varchar(100) NOT NULL,
+rstatus varchar(50) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(repairid),
-FOREIGN KEY(repairproductid) references repairproduct(repairproductid));
+PRIMARY KEY(repairId),
+FOREIGN KEY(repairproductId) references repairproduct(repairproductId),
+FOREIGN KEY(subcategoryId) references subcategory(subcategoryId));
 
 DROP TABLE IF EXISTS repairpartsused;
 create table repairpartsused(
-repairpartsusedid int(50) NOT NULL AUTO_INCREMENT,
-repairid int(50) NOT NULL,
-productid int(50) NOT NULL,
+repairpartsusedId int(50) NOT NULL AUTO_INCREMENT,
+repairId int(50) NOT NULL,
+productId int(50) NOT NULL,
 datecreated datetime not null,
-PRIMARY KEY(repairpartsusedid),
-FOREIGN KEY(repairid) references repairr(repairid),
-FOREIGN KEY(productid) references product(productid));
+PRIMARY KEY(repairpartsusedId),
+FOREIGN KEY(repairId) references repairs(repairId),
+FOREIGN KEY(productId) references product(productId));
 
