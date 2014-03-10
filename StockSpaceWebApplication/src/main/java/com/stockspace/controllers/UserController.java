@@ -3,10 +3,12 @@ package com.stockspace.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.stockspace.models.User;
 import com.stockspace.services.UserService;
@@ -15,6 +17,8 @@ import com.stockspace.services.UserService;
 @Controller
 public class UserController {
 	
+	protected static final String JSON_CONTENT = "application/json";
+
 	@Autowired(required = true)
 	private UserService userService;
 	
@@ -25,6 +29,19 @@ public class UserController {
 		users = userService.findAllUsers();
 		model.addAttribute("users", users);
 		return "user/viewusers";
+	}
+
+	@RequestMapping(value = "/api/getuser", method = RequestMethod.GET, produces = JSON_CONTENT)
+	@ResponseBody
+	public List<User> getUsers() {
+		try{
+		List<User> user = userService.getAllUsers();
+		return user;
+		}
+		catch(BadSqlGrammarException e){
+			System.out.println(e.getMessage());
+		}
+		return null;
 	}
 
 }

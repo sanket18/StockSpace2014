@@ -11,4 +11,6 @@ import com.stockspace.models.User;
 public interface UserMapper {
 	
 	List<User> findAllUsers();
+
+	List<User> getAllUsers();
 }
