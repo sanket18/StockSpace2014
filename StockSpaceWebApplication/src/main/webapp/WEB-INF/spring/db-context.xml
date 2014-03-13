@@ -26,7 +26,7 @@
 		<property name="configLocation" value="/WEB-INF/mybatis.xml" />
 	</bean>
 
-	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+	<bean id="UserMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.stockspace.mappers.UserMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>

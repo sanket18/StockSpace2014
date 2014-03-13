@@ -15,9 +15,9 @@
 <title>Stock Space Web Application</title>
 
 <!-- Bootstrap core CSS -->
-<link href="/StockSpaceWebApplication/resources/css/bootstrap.css" rel="stylesheet">
+<link href="/StockSpaceWeb/resources/css/bootstrap.css" rel="stylesheet">
 <!-- Bootstrap theme -->
-<link href="/StockSpaceWebApplication/resources/css/bootstrap-theme.min.css" rel="stylesheet">
+<link href="/StockSpaceWeb/resources/css/bootstrap-theme.min.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 </head>

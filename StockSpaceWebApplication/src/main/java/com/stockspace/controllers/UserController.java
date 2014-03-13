@@ -30,18 +30,4 @@ public class UserController {
 		model.addAttribute("users", users);
 		return "user/viewusers";
 	}
-
-	@RequestMapping(value = "/api/getuser", method = RequestMethod.GET, produces = JSON_CONTENT)
-	@ResponseBody
-	public List<User> getUsers() {
-		try{
-		List<User> user = userService.getAllUsers();
-		return user;
-		}
-		catch(BadSqlGrammarException e){
-			System.out.println(e.getMessage());
-		}
-		return null;
-	}
-
 }
