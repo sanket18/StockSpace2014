@@ -1,5 +1,7 @@
 package com.stockspace.models;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +12,10 @@ import lombok.NoArgsConstructor;
 public class Repairs {
 
 	private int repairId;
-	private int repairproductId;
 	private int subCategoryId;
 	private String description;
-	private String repairSatus;
+	private String repairStatus;
 	private String dateCreated;
+	private int customerId;
+	private int employeeId;
 }

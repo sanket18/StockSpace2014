@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stockspace.mappers.CustomerMapper">
+
+	<select id="findAllCustomers" resultType="com.stockspace.models.Customer">
+		SELECT * FROM
+		stockspace.customer;
+	</select>
+
+	<select id="findCustomersById" parameterType="int" resultType="com.stockspace.models.Customer">
+		SELECT * FROM stockspace.customer where customerId=#{customerId};
+	</select>
+
+	<update id="deactivateCustomer" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update stockspace.customer set isActive=false where
+		customerId=#{customerId};
+	</update>
+
+	<update id="activateCustomer" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update stockspace.customer set isActive=true where
+		customerId=#{customerId};
+	</update>
+
+	<select id="editCustomer" parameterType="int"
+		resultType="com.stockspace.models.Customer">
+		select * from stockspace.customer where
+		customerId=#{customerId};
+	</select>
+
+	<insert id="saveCustomer" parameterType="com.stockspace.models.Customer"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into stockspace.customer(customerId,fullName,email,address,phone,isActive,dateCreated)
+		values
+		(#{customerId},#{fullName},#{email},#{address},#{phone},#{isActive},NOW())
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+		<update id="updateCustomer" parameterType="int">
+		update stockspace.customer set customerId=#{customerId},fullName=#{fullName},
+		email=#{email},address=#{address},phone=#{phone},isActive=#{isActive},dateCreated=NOW()
+		where customerId=#{customerId};
+	</update>
+</mapper>

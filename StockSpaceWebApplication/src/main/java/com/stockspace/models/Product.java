@@ -11,8 +11,8 @@ public class Product {
 	
 	private int productId;
 	private String productName;
-	private int subcategoryId;
-	private int description;
+	private int subCategoryId;
+	private String description;
 	private String dateCreated;
 
 }

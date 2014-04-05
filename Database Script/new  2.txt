@@ -1,0 +1,27 @@
+<tr>
+	<td>1</td>
+	<td>Iphone5
+		<table class="table table-hover">
+		<tr><th>Parts Used</th><th>&nbsp;</th></tr>
+		<tr><td>White LCD</td><td><a href="" class="glyphicon glyphicon-minus"></a></td></tr>
+		<tr><td>Headphone Jack</td><td><a href="" class="glyphicon glyphicon-minus"></a></td></tr>
+		</table>
+	</td>
+	<td>Screen Replacement + Headphone Jack Fix</td>
+	<td>In Repair</td>
+	<td> <%= new java.util.Date()%></td>
+	<td><a href="" class="glyphicon glyphicon-plus"></a></td>
+	<td><a href="">Remove</a></td>
+	</tr>
+	<tr>
+	<td>2</td>
+	<td>Samsung S3
+		<table class="table table-hover">
+		<tr><th>Parts Used</th><th>&nbsp;</th></tr>
+		<tr><td>Charging Port</td><td><a href="" class="glyphicon glyphicon-minus"></a></td></tr>
+		<tr><td>Back Camera</td><td><a href="" class="glyphicon glyphicon-minus"></a></td></tr>
+		</table>
+	</td>
+	<td>Charging Port fix + Camera Replacement</td>
+	<td>Repaired</td>
+	<td> <%= new java.util.Date()%></td>

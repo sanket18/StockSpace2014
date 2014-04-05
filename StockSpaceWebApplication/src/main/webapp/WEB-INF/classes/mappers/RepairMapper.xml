@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stockspace.mappers.RepairMapper">
+
+	<insert id="addRepairs" parameterType="com.stockspace.models.Repairs">
+		INSERT INTO
+		stockspace.repairs(repairId,subCategoryId,description,repairStatus,dateCreated,customerId,employeeId)
+		VALUES(#{repairId},#{subCategoryId},#{description},#{repairStatus},NOW(),#{customerId},#{employeeId})
+	</insert>
+
+	<select id="getRepairs" resultType="com.stockspace.models.Repairs">
+		SELECT * FROM
+		stockspace.repairs;
+	</select>
+
+	<select id="getRepairsByCustomerId" parameterType="int"
+		resultType="com.stockspace.models.Repairs">
+		SELECT * FROM stockspace.repairs where
+		customerId=#{customerId};
+	</select>
+
+	<select id="getRepairById" parameterType="int"
+		resultType="com.stockspace.models.Repairs">
+		select * from stockspace.repairs where repairId=#{repairId};
+	</select>
+
+	<update id="updateStatus" parameterType="com.stockspace.models.Repairs">
+		update stockspace.repairs set repairStatus=#{repairStatus},description=#{description} where repairId=#{repairId};
+	</update>
+</mapper>
