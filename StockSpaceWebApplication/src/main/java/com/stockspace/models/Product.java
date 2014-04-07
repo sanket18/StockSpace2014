@@ -16,5 +16,9 @@ public class Product {
 	private int subCategoryId;
 	private String description;
 	private String dateCreated;
+
 	private List<Stock> stock;
+	private Boolean isActive;
+	
+	
 }

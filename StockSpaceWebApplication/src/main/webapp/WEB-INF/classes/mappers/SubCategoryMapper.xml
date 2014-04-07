@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stockspace.mappers.SubCategoryMapper">
+
+	<select id="findAllSubCategory" parameterType="int" resultType="com.stockspace.models.SubCategory">
+		select * from stockspace.subcategory where categoryId=#{catid};
+	</select>
+	
+	<insert id="saveSubCategory" parameterType="com.stockspace.models.SubCategory"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into stockspace.subcategory(subCategoryName, categoryId, dateCreated)
+		values
+		(#{subCategoryName},#{categoryId},NOW())
+		<selectKey keyProperty="id" resultType="String" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<select id="getSubCategoryById" parameterType="int" resultType="com.stockspace.models.SubCategory">
+			select * from stockspace.subcategory where subCategoryId=#{subCategoryId}
+	</select>
+	
+	<update id="updateSubCategory" parameterType="int">
+		update stockspace.subcategory
+		set subCategoryName = #{subCategoryName} where subCategoryId = #{subCategoryId}
+	</update>
+	
+	<select id="validateEntry" parameterType="com.stockspace.models.SubCategory"
+		resultType="int">
+		SELECT count(*) FROM stockspace.subcategory 
+		where subCategoryName = #{subCategoryName}
+		
+	</select>
+	
+	<select id="getSubCategoryByCategory" parameterType="int" resultType="com.stockspace.models.SubCategory">
+		select * from stockspace.subcategory where categoryId = #{categoryId};	
+	</select>
+	
+	<update id="deactivateSubCategory" parameterType="int" flushCache="true"
+ 		statementType="PREPARED">
+ 		update stockspace.subcategory set isActive=false where
+ 		subCategoryId=#{subCategoryId};
+ 	</update>
+ 
+ 	<update id="activateSubCategory" parameterType="int" flushCache="true"
+ 		statementType="PREPARED">
+ 		update stockspace.subcategory set isActive=true where
+ 		subCategoryId=#{subCategoryId};
+ 	</update>
+	
+	
+</mapper>
+	
