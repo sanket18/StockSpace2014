@@ -8,9 +8,9 @@
 	
 	<insert id="saveSubCategory" parameterType="com.stockspace.models.SubCategory"
 		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-		insert into stockspace.subcategory(subCategoryName, categoryId, dateCreated)
+		insert into stockspace.subcategory(subCategoryName, categoryId, dateCreated,isActive)
 		values
-		(#{subCategoryName},#{categoryId},NOW())
+		(#{subCategoryName},#{categoryId},NOW(),#{isActive})
 		<selectKey keyProperty="id" resultType="String" order="AFTER">
 			select last_insert_id()
 		</selectKey>

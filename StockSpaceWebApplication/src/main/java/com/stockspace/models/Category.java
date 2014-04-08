@@ -15,6 +15,7 @@ public class Category {
 	private String categoryName;
 	private int companyId;
 	private String dateCreated;
+	private Boolean isActive;
 	
 	private List<SubCategory> subcategory;
 	

@@ -1,22 +1,19 @@
 <%@ include file="../includes/header.jsp"%>
-<br><br><br>
-<h3>View</h3>
-
-<h3 class="pull-left silent">SubCategory</h3>
-<button class="btn btn-default pull-right"
-	data-toggle="modal" data-target="#myModal" id="subCategoryBtn">
-	Add New Sub-Category
-</button>
 <br>
-
-
+<br>
+<br>
+<h3 class="pull-left silent">SubCategory</h3>
+<button class="btn btn-default pull-right" data-toggle="modal"
+	data-target="#myModal" id="subCategoryBtn">Add New
+	Sub-Category</button>
+<br>
 <c:if test="${!empty subcategory}">
 	<c:if test="${!empty result}">
   	${result }
 </c:if>
-<br><br>
+<br>
+<br>
 </c:if>
-
 
 <!-- View for company,category and subcategory -->
 <table class="table table-hover">
@@ -25,6 +22,7 @@
     <th>Category</th>
     <th>SubCategory</th>
     <th>Action</th>
+	<th>&nbsp;</th>
 </tr>
 <c:forEach items="${companies}" var="companies">
 
@@ -33,8 +31,7 @@
    			 <c:forEach items="${category.subcategory}" var="subcategory">
    				 	 <c:choose>
    					  	<c:when test="${subcategory.isActive==true}">
- 
-   				 	<tr>
+    				 	<tr>
     	        		<td>${companies.companyName}</td>
         				<td>${category.categoryName}</td>
         				<td>${subcategory.subCategoryName}</td>
@@ -42,10 +39,7 @@
         				<td><a href="edit/${subcategory.subCategoryId}">edit</a></td>
    					 </tr> 
    					 </c:when>
-   					 </c:choose>
-   					 
-   					 <c:choose>
-   					  	<c:when test="${subcategory.isActive==false}">
+ 					<c:when test="${subcategory.isActive==false}">
  
    				 	<tr>
     	        		<td>${companies.companyName}</td>

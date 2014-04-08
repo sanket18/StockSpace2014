@@ -14,6 +14,6 @@ public class Company {
 	private int companyId;
 	private String companyName;
 	private String datecreated;
-	
+	private Boolean isActive;
 	private List<Category> category;
 }

@@ -1,8 +1,6 @@
 <%@ include file="../includes/header.jsp"%>
 <br><br><br>
-<h3>View</h3>
-
-<h3 class="pull-left silent">product</h3>
+<h3 class="pull-left silent">Product</h3>
 <button class="btn btn-default pull-right"
 	data-toggle="modal" data-target="#myModal" id="productBtn">
 	Add New Product
@@ -27,6 +25,7 @@
     <th>SubCategory</th>
     <th>Product</th>
     <th>Action</th>
+    <th>&nbsp;</th>
 </tr>
 <c:forEach items="${companies}" var="companies">
 
@@ -46,8 +45,6 @@
         				<td><a href="activate/${product.productId}">Active</a></td>
    					 </tr>
    					 </c:when>
-   					 </c:choose>
-   					 <c:choose>
    					  	<c:when test="${product.isActive==true}">
    				 			<tr>
     	        			<td>${companies.companyName}</td>

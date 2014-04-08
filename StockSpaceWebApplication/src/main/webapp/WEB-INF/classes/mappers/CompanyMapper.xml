@@ -5,5 +5,34 @@
 	<select id="findAllCompany" resultType="com.stockspace.models.Company">
 		select * from stockspace.company;
 	</select>
+<select id="getAllCompany" parameterType="int" resultType="com.stockspace.models.Company">
+select * from stockspace.company;
+</select>
 
+<insert id="saveCompany" parameterType="com.stockspace.models.Company"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into company(companyName,dateCreated,isActive)
+		values
+		(#{companyName},NOW(),1)
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<update id="updtCompany" parameterType="com.stockspace.models.Company"  >
+	update stockspace.company set companyName=#{companyName} where companyId=#{companyId} 
+	</update>
+	
+	<select id="edtCompany" parameterType="int" resultType="com.stockspace.models.Company">
+	select * from stockspace.company where companyId=#{companyId}
+	</select>
+	
+	<update id="actCompany" parameterType="int"  >
+	update stockspace.company set isActive=1 where companyId=#{companyId} 
+	</update>
+	
+	<update id="deactCompany" parameterType="int"  >
+	update stockspace.company set isActive=0 where companyId=#{companyId} 
+	</update>
+	
 </mapper>

@@ -2,11 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stockspace.mappers.CategoryMapper">
 
-	<select id="findAllCategory" parameterType="int" resultType="com.stockspace.models.Category">
+	<select id="findAllCategory" parameterType="int"
+		resultType="com.stockspace.models.Category">
 		select * from stockspace.category where companyId=#{cid};
 	</select>
-	
-	<select id="getCategoryByCompany" parameterType="int" resultType="com.stockspace.models.Category">
-		select * from stockspace.category where companyId=#{companyId};	
+
+	<select id="getCategoryByCompany" parameterType="int"
+		resultType="com.stockspace.models.Category">
+		select * from stockspace.category where
+		companyId=#{companyId};
 	</select>
+
+	<select id="getAllCategory" parameterType="int"
+		resultType="com.stockspace.models.Category">
+		select * from stockspace.category;
+	</select>
+
+
+	<insert id="saveCategory" parameterType="com.stockspace.models.Category"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into
+		stockspace.category(categoryName,dateCreated,companyId,isActive)
+		values
+		(#{categoryName},NOW(),#{companyId},1)
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<select id="edtCategory" parameterType="int"
+		resultType="com.stockspace.models.Category">
+		select * from stockspace.category where categoryId=#{categoryId}
+	</select>
+
+	<update id="updtCategory" parameterType="com.stockspace.models.Category">
+		update stockspace.category set categoryName=#{categoryName} where
+		categoryId=#{categoryId}
+	</update>
+
+
+	<update id="actCategory" parameterType="int">
+		update stockspace.category set isActive=1 where categoryId=#{categoryId}
+	</update>
+
+	<update id="deactCategory" parameterType="int">
+		update stockspace.category set isActive=0 where categoryId=#{categoryId}
+	</update>
 </mapper>

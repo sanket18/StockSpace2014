@@ -27,4 +27,34 @@ public class CategoryService {
 		categories= categoryMapper.getCategoryByCompany(companyId);
 		return categories;
 	}
+	
+	public List<Category> getAllCategory() {
+		// TODO Auto-generated method stub
+		return categoryMapper.getAllCategory();
+	}
+
+	public int saveCategory(Category category) {
+		// TODO Auto-generated method stub
+		return categoryMapper.saveCategory(category);
+	}
+
+	public Category edtCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return categoryMapper.edtCategory(categoryId);
+	}
+
+	public int updtCategory(Category category) {
+		// TODO Auto-generated method stub
+		return categoryMapper.updtCategory(category);
+	}
+
+	public int actCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return categoryMapper.actCategory(categoryId);
+	}
+
+	public int deactCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return categoryMapper.deactCategory(categoryId);
+	}
 }

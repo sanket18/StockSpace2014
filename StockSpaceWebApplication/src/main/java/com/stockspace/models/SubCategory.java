@@ -16,7 +16,5 @@ public class SubCategory {
 	private int categoryId;
 	private String dateCreated;
 	private Boolean isActive;
-	
-	
 	private List<Product> product;
 }

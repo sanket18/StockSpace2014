@@ -30,10 +30,6 @@
 		<property name="mapperInterface" value="com.stockspace.mappers.UserMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
-
-	<bean id="RepairMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.stockspace.mappers.RepairMapper" />
-	</bean>
 	
 	<bean id="CompanyMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.stockspace.mappers.CompanyMapper" />
@@ -60,6 +56,12 @@
 		<property name="mapperInterface" value="com.stockspace.mappers.ProductMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	
+	<bean id="RepairMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.stockspace.mappers.RepairMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
 	
 	<bean id="StockMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 	<property name="mapperInterface" value="com.stockspace.mappers.StockMapper" />
