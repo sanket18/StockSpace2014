@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stockspace.mappers.StockMapper">
+
+	<select id="getAllStocks" resultType="com.stockspace.models.Stock">
+		SELECT * FROM stockspace.stock;
+	</select>
+
+	<update id="deactivateStock" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update stockspace.stock set isActive=false where
+		stockId=#{stockId};
+	</update>
+
+	<update id="activateStock" parameterType="int" flushCache="true"
+		statementType="PREPARED">
+		update stockspace.stock set isActive=true where
+		stockId=#{stockId};
+	</update>
+
+	<select id="editStock" parameterType="int"
+		resultType="com.stockspace.models.Stock">
+		select * from stockspace.stock where
+		stockId=#{stockId};
+	</select>
+
+	<update id="updateStock" parameterType="com.stockspace.models.Stock">
+		update stockspace.stock
+		set
+		quantity=#{quantity},minimumStockQuantity=#{minimumStockQuantity},isActive=#{isActive}
+		where stockId=#{stockId};
+	</update>
+
+	<insert id="saveStock" parameterType="com.stockspace.models.Stock"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into
+		stockspace.stock(stockId,productId,quantity,minimumStockQuantity,isActive,dateCreated)
+		values
+		(#{stockId},#{productId},#{quantity},#{minimumStockQuantity},#{isActive},NOW())
+		<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+</mapper>

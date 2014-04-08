@@ -6,4 +6,8 @@
 		SELECT * FROM
 		stockspace.product;
 	</select>
+	
+	<select id="getProductNameById"  parameterType="int"  resultType="com.stockspace.models.Product">
+		SELECT * FROM stockspace.product where productId=#{productId};
+	</select>
 </mapper>

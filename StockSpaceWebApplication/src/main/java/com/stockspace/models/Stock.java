@@ -12,7 +12,8 @@ public class Stock {
 	private int stockId;
 	private int productId;
 	private int quantity;
-	private int minmumStockQuantity;
+	private int minimumStockQuantity;
 	private String dateCreated;
-
+	private String productName;
+	private Boolean isActive;
 }

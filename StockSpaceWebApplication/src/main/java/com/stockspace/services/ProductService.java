@@ -18,6 +18,11 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		return productMapper.getAllProducts();
 	}
+
+	public Product getProductNameById(int productId) {
+		// TODO Auto-generated method stub
+		return productMapper.getProductNameById(productId);
+	}
 	
 	
 

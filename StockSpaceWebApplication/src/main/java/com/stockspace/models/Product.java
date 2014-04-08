@@ -14,5 +14,6 @@ public class Product {
 	private int subCategoryId;
 	private String description;
 	private String dateCreated;
+	private boolean isActive;
 
 }
