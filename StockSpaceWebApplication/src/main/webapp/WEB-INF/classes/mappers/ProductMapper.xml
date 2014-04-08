@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stockspace.mappers.ProductMapper">
 
+
 	<select id="getAllProducts" resultType="com.stockspace.models.Product">
 		SELECT * FROM
 		stockspace.product;
@@ -11,3 +12,48 @@
 		SELECT * FROM stockspace.product where productId=#{productId};
 	</select>
 </mapper>
+	<select id="findAllProducts" parameterType="int" resultType="com.stockspace.models.Product">
+		select productName,productId,isActive from stockspace.product where subCategoryId=#{subcatid}
+	</select>
+
+<insert id="saveProduct" parameterType="com.stockspace.models.Product"
+		useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		insert into stockspace.product(productName, subCategoryId,description, dateCreated, isActive)
+		values
+		(#{productName},#{subCategoryId},#{description}, NOW(),#{isActive})
+		<selectKey keyProperty="id" resultType="String" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<select id="validateEntry" parameterType="com.stockspace.models.Product"
+		resultType="int">
+		SELECT count(*) FROM stockspace.product 
+		where productName = #{productName}
+		
+	</select>
+	
+	<select id="getProductById" parameterType="int" resultType="com.stockspace.models.Product">
+			SELECT productId,productName,subCategoryId FROM stockspace.product where productId = #{productId}
+	</select>
+	
+	<update id="updateProduct" parameterType="int">
+		update stockspace.product
+		set productName = #{productName} where productId = #{productId}
+	</update>
+	
+	<update id="deactivateProduct" parameterType="int" flushCache="true"
+ 		statementType="PREPARED">
+ 		update stockspace.product set isActive=false where
+ 		productId=#{productId};
+ 	</update>
+ 
+ 	<update id="activateProduct" parameterType="int" flushCache="true"
+ 		statementType="PREPARED">
+ 		update stockspace.product set isActive=true where
+ 		productId=#{productId};
+ 	</update>
+	
+	
+</mapper>	
+>>>>>>> 8406189bed6af66584ea40fbaf4ac95d46951a36

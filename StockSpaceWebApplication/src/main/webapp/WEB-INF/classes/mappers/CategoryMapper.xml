@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stockspace.mappers.CategoryMapper">
+
+	<select id="findAllCategory" parameterType="int" resultType="com.stockspace.models.Category">
+		select * from stockspace.category where companyId=#{cid};
+	</select>
+	
+	<select id="getCategoryByCompany" parameterType="int" resultType="com.stockspace.models.Category">
+		select * from stockspace.category where companyId=#{companyId};	
+	</select>
+</mapper>

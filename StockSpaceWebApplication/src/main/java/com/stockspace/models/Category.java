@@ -1,5 +1,7 @@
 package com.stockspace.models;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +15,7 @@ public class Category {
 	private String categoryName;
 	private int companyId;
 	private String dateCreated;
+	
+	private List<SubCategory> subcategory;
+	
 }
